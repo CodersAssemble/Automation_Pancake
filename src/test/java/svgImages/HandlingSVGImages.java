@@ -8,7 +8,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+import org.testng.Assert;
+
+
 public class HandlingSVGImages {
+
 
 	public static void main(String[] args) {
 		
@@ -19,61 +23,41 @@ public class HandlingSVGImages {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3000));
 		
 		driver.get("file:///C:/Users/yases/Desktop/index.html");
-		/*
-				<!DOCTYPE html>
-				<html lang="en">
-				<head>
-				  <meta charset="utf-8">
-				  <meta name="description" content="Hello World app for Fifa Social">
-				  <meta name="viewport" content="width=device-width">
-				  <title>Fifa Social - Hello World</title>
-				
-				
-				</head>
-				<body>
-				   <svg>
-						<circle cx="50" cy="50" r="50" fill="red" />
-				   </svg>
-				   <svg>
-				        <text id="yashu"
-						x="5" y="30">Yaseswini Yarlagadda</text>
-				   </svg>   
-				   <svg>
-						<rect x="0" y="0" width="100" height="100" fill="green" />
-				   </svg>
-				   <svg>
-						<line x1="0" y1="0" x2="100" y2="100" stroke="#529fca" />
-				   </svg>
-				   <svg height="300" width="300">
-						<path
-							d="M 100 100 L 200 200 H 10 V 40 H 70"
-							fill="#59fa81"
-							stroke="#d85b49"
-							stroke-width="3"
-						/>
-					</svg>
-					<svg>
-						<polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" />
-					</svg>
-					<svg width="200" height="200">
-					  <rect x="0" y="0" width="100" height="100" fill="#529fca" />
-					  <g id="my-group">
-						<rect x="0" y="100" width="100" height="100" fill="#59fa81" />
-						<rect x="100" y="0" width="100" height="100" fill="#ad4a3d" />
-					  </g>
-					</svg>
-					<svg>
-					<text id="yas" x="5" y="70" style="fill: green; font
-					: Courier New">Yashu</text>
-					</svg>
-				</body>
-				</html>
-		*/
-		String color = driver.findElement(By.xpath("//*[name()='svg']//*[local-name()='circle']")).getAttribute("fill");
-		System.out.println(color);
 		
-		String text = driver.findElement(By.xpath("//*[name()='svg']//*[local-name()='text' and @id='yas']")).getText();
-		System.out.println(text);
+		String expectedColor = "red";
+		String actualColor = driver.findElement(By.xpath("//*[name()='svg']//*[local-name()='circle']")).getAttribute("fill");
+		Assert.assertEquals(expectedColor, actualColor);
+		System.out.println("Assertion Passed! expected color : " +expectedColor+ " and actual color : " +actualColor+ " are same!");
+	
+		String expectedText = "Yaseswini Yarlagadd";
+		String actualText = driver.findElement(By.xpath("//*[name()=\"svg\"]//*[local-name()=\"text\" and @id=\"yashu\"]")).getText();
+		Assert.assertEquals(actualText, expectedText);
+		System.out.println("Assertion Passed! expected text : " +expectedText+ " and actual text : " +actualText+ " are same!");
+		
+		String expectedFill = "green";
+		String actualFill = driver.findElement(By.xpath("//*[name()=\"svg\"]//*[local-name()=\"rect\"]")).getAttribute("fill");
+		Assert.assertEquals(actualFill, expectedFill);
+		System.out.println("Assertion Passed! expected fill : " +expectedFill+ " and actual fill : " +actualFill+ " are same!");
+		
+		String expectedStroke = "#529fca";
+		String actualStroke = driver.findElement(By.xpath("//*[name()=\"svg\"]//*[local-name()=\"line\"]")).getAttribute("stroke");
+		Assert.assertEquals(actualStroke, expectedStroke);
+		System.out.println("Assertion Passed! expected stroke : " +expectedStroke+ " and actual stroke : " +actualStroke+ " are same!");
+		
+		String expectedTagText = "Yashu";
+		String actualTagText = driver.findElement(By.xpath("//*[name()='svg']//*[local-name()='text' and @id='yas']")).getText();
+		Assert.assertEquals(actualTagText, expectedTagText);
+		System.out.println("Assertion Passed! expected tag text : " +expectedTagText+ " and actual tag text : " +actualTagText+ " are same!");
+		
+		String expectedX = "#59fa81";
+		String expectedY = "#ad4a3d";
+		String actualX = driver.findElements(By.xpath("//*[name()=\"svg\"]//*[local-name()=\"g\"]//*[local-name()=\"rect\"]")).get(0).getAttribute("fill");
+		String actualY = driver.findElements(By.xpath("//*[name()=\"svg\"]//*[local-name()=\"g\"]//*[local-name()=\"rect\"]")).get(1).getAttribute("fill");
+		Assert.assertEquals(actualY, expectedY);
+		System.out.println("Assertion Passed! expected Y : " +expectedY+ " and actual Y : " +actualY+ " are same!");
+		Assert.assertEquals(actualX, expectedX);
+		System.out.println("Assertion Passed! expected X : " +expectedX+ " and actual X : " +actualX+ " are same!");
+		
 	}
 
 }
