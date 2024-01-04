@@ -23,8 +23,9 @@ public class CapturingScreenshots {
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2000));
 		
+		//Interface-TakesScreenshot, getScreenshotAs-method
 		 File screenshotFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		 
+		 //Using the file object to copy the image at desired location.
 		 try {
 			 FileUtils.copyFile(screenshotFile, new File("F://CodeBlooded/automationPanCake/screenshots/ss.png"));
 		} catch (Exception e) {
