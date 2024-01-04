@@ -9,7 +9,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.testng.Assert;
 
-
 public class HandlingSVGImages {
 
 
