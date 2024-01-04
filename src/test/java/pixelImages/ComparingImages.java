@@ -2,7 +2,6 @@ package pixelImages;
 
 import java.io.File;
 
-import java.io.IOException;
 import java.time.Duration;
 import javax.imageio.ImageIO;
 
@@ -17,27 +16,27 @@ import ru.yandex.qatools.ashot.Screenshot;
 
 public class ComparingImages {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args)  {
 		
 		WebDriverManager.chromedriver().setup();
 		WebDriver driver = new ChromeDriver();
 		
-		driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
-		
+		driver.get("https://omayo.blogspot.com/");
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2000));
 		
-		
-		
-		WebElement logo = driver.findElement(By.xpath("//img[@alt='company-branding']"));
-		
-		Screenshot logoScreenShot = new AShot().takeScreenshot(driver, logo);
+		WebElement image = driver.findElement(By.xpath("(//div//img)[4]"));
+		Screenshot logoScreenShot = new AShot().takeScreenshot(driver, image);
 		
 		//Saving screenshot as a file format
 		
 		//to get the taken screenshot---logoScreenShot.getImage()
-		
-		ImageIO.write(logoScreenShot.getImage(),"png", new File("F://CodeBlooded/automationPanCake/logos/logo.png"));
+		try {
+			ImageIO.write(logoScreenShot.getImage(),"png", new File("F://CodeBlooded/automationPanCake/logos/logo.png"));
+		} catch (Exception e) {
+			e.getMessage();
+		}
+		driver.quit();
 		
 //		File f = new File("F://CodeBlooded/automationPanCake/logos/logo.png");
 		
@@ -47,5 +46,4 @@ public class ComparingImages {
 //			System.out.println("Image File Not existed!");
 //		}
 	}
-
 }
